@@ -2,6 +2,9 @@
 
 Traitement de données et production de statistiques pour l'analyse de commandes.
 
+## dependencies
+Python 3.13.2
+
 ## Structure du projet
 
 **Fichiers de données :**
