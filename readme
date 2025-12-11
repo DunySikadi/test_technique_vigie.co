@@ -1,0 +1,25 @@
+# Test technique – Vigie.co
+
+Traitement de données et production de statistiques pour l'analyse de commandes.
+
+## Structure du projet
+
+**Fichiers de données :**
+- `orders.jsonl` : fichier source contenant les commandes au format JSONL (une commande par ligne)
+
+**Modules Python :**
+- `order.py` : définit la classe `Order` (immuable) avec conversion des montants en euros et validation intégrée
+- `order_loader.py` : charge et parse les commandes depuis le fichier JSONL
+  - `parse_datetime()` : convertit les chaînes ISO 8601 en objets datetime
+  - `load_orders_from_jsonl()` : lit le fichier, valide les commandes et retourne les commandes valides + les logs d'erreurs
+- `order_validator.py` : valide la cohérence des données (champs obligatoires, types, etc.) et calcule les agrégats
+- `test.py` : tests d'integration (je l'ai privilegié au test unitaire) du chargement, validation et traitement
+- `main.py` : point d'entrée de l'application
+
+## Questions mindset
+
+1. **Surveillance en production :** prioriser le monitoring de la performance (temps de traitement, utilisation mémoire)
+
+2. **Passage à l'échelle (10 Ko → 10 Go) :** migration vers une base de données PostgreSQL pour le stockage et le traitement par batch
+
+3. **Tests prioritaires :** validation de l'intégrité des données du fichier source
